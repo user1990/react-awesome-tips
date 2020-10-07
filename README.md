@@ -1,5 +1,4 @@
 # react-awesome-tips
-
 Whole article is written like an “style guide” with 3 sub-sections for every tip/pattern which consists of:
 
 - **Don’t** 🚨 ( code example what you shouldn’t be doing)
@@ -64,3 +63,35 @@ table-header.tsx;
 - No more weird git conflicts when renaming/deleting/adding files on various OS file systems (case-sensitive/insensitive)
 - Consistency (I don’t have to think if this file is component or some helper or service. tsx extension tells me that)
 - Nicely maps to component implementation name table-header.tsx 👉 `const TableHeader = () => {}`
+
+---
+
+## Don’t use return statement for dumb component
+
+**Don't**
+
+```javascript
+export const CardList = ({ item }: CardListProps) => {
+  return (
+    <CardContainer>
+      SOME JSX
+    </CardContainer>
+  );
+};
+```
+
+**Do**
+
+```javascript
+export const CardList = ({ item }: CardListProps) => (
+  <CardContainer>
+    SOME JSX
+  </CardContainer>
+);
+```
+
+**Why**
+
+- When component don't have logic like hooks usage or declared variables curly brackets and return statement is unnecessary
+- Shorter and cleaner syntax
+
