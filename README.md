@@ -55,7 +55,7 @@ TableHeader.tsx;
 **Do**
 
 ```javascript
-table - header.tsx;
+table-header.tsx;
 ```
 
 **Why**
