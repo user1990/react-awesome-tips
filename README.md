@@ -228,9 +228,8 @@ type StyledElementProps {
 }
 
 const StyledElement = styled.div`
-  ${(props: StyledElementProps) => {
-    return `background: linear-gradient(90deg, ${hex} -100%, rgba(255, 255, 255, 0) 100%), url(${imageUrl});`;
-  }}
+ ${(props: EventHeroImageProps) =>
+    `background: linear-gradient(90deg, ${props.hex} -100%, rgba(255, 255, 255, 0) 100%), url(${props.image});`}
   width: 100%;
   height: 100%;
 `;
