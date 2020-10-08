@@ -55,7 +55,7 @@ TableHeader.tsx;
 **Do**
 
 ```javascript
-table-header.tsx;
+table - header.tsx;
 ```
 
 **Why**
@@ -212,9 +212,8 @@ type ElementProps {
 }
 
 const Element = styled.div`
-  ${(props: ElementProps) => {
-    return `background: linear-gradient(90deg, ${hex} -100%, rgba(255, 255, 255, 0) 100%), url(${imageUrl});`;
-  }}
+ ${(props: EventHeroImageProps) =>
+    `background: linear-gradient(90deg, ${props.hex} -100%, rgba(255, 255, 255, 0) 100%), url(${props.image});`}
   width: 100%;
   height: 100%;
 `;
@@ -273,40 +272,51 @@ const ProductListContainer = (props: Props) => {
     <>
       {products.map((product: Product) => {
         return (
-          <ProductItem product={product} key={product.id} dispatchToStore={props.addItem} />
+          <ProductItem
+            product={product}
+            key={product.id}
+            dispatchToStore={props.addItem}
+          />
         );
       })}
     </>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductListContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductListContainer);
 ```
 
 **Do**
 
 ```javascript
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { AppStore, Product } from '../types';
-import ProductItem from '../components/ProductItem';
-import { actions } from '../actions/constants';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { AppStore, Product } from "../types";
+import ProductItem from "../components/ProductItem";
+import { actions } from "../actions/constants";
 
 const ProductListHooks = () => {
   const dispatch = useDispatch();
-  const products: Product[] = useSelector((state: AppStore) => state.productsModule.products);
+  const products: Product[] = useSelector(
+    (state: AppStore) => state.productsModule.products
+  );
 
   return (
     <>
-      {
-        products.map((product: Product) => {
-          return (
-            <ProductItem product={product} key={product.id} dispatchToStore={dispatch} />
-          )
-        })
-      }
+      {products.map((product: Product) => {
+        return (
+          <ProductItem
+            product={product}
+            key={product.id}
+            dispatchToStore={dispatch}
+          />
+        );
+      })}
     </>
-  )
+  );
 };
 
 export default ProductListHooks;
@@ -432,6 +442,7 @@ const StyledMessageDanger = styled(StyledMessage)`
 - Extend main component into several new ones
 - Reduce repetitive code
 - Pass any component to existing one, not just DOM elements
+
 ---
 
 ## Pitfalls with the useState React hook
@@ -439,16 +450,18 @@ const StyledMessageDanger = styled(StyledMessage)`
 **Don't**
 
 ```javascript
-const [user, setUser] = useState(
-  { name: 'John', email: 'john@example.com', age: 25 }
-);
+const [user, setUser] = useState({
+  name: "John",
+  email: "john@example.com",
+  age: 25,
+});
 ```
 
 **Do**
 
 ```javascript
-const [name, setName] = useState('John');
-const [email, setEmail] = useState('john@example.com');
+const [name, setName] = useState("John");
+const [email, setEmail] = useState("john@example.com");
 const [age, setAge] = useState(25);
 ```
 
@@ -457,4 +470,3 @@ const [age, setAge] = useState(25);
 - Unexpected behavior
 - Avoiding deep cloning
 - Pass any component to existing one, not just DOM elements
-
